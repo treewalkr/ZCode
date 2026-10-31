@@ -1,5 +1,6 @@
-import { isSea } from "node:sea";
 import type { RuntimeInfo } from "@zcode/shared-types";
+
+import { getSeaModule } from "./sea.js";
 
 export { type RuntimeInfo };
 
@@ -9,6 +10,6 @@ export const getRuntimeInfo = (): RuntimeInfo => ({
   execPath: process.execPath,
   node: process.version,
   platform: process.platform,
-  sea: isSea(),
+  sea: getSeaModule()?.isSea() === true,
   versions: process.versions,
 });

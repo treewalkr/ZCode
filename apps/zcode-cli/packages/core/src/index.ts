@@ -204,6 +204,7 @@ export { color, formatJson, supportsColor } from "./output.js";
 // Environment helpers
 export { getRuntimeInfo } from "./environment.js";
 export type { RuntimeInfo } from "./environment.js";
+export { getSeaModule } from "./sea.js";
 
 export type {
   Logger,

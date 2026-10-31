@@ -5,6 +5,7 @@ import { createRequire } from "node:module";
 import { homedir, platform, tmpdir } from "node:os";
 import { dirname, join, normalize, sep } from "node:path";
 import type { PlaywrightChromiumModule } from "@zcode/adapters/browser";
+import { getSeaModule } from "@zcode/core";
 
 declare const __CLI_VERSION__: string;
 
@@ -30,8 +31,8 @@ const MARKER_FILE = "playwright-manifest.json";
 const PACKAGE_JSON_PATH = "node_modules/playwright-core/package.json";
 
 export async function loadCliPlaywrightChromium(): Promise<PlaywrightChromiumModule> {
-  const sea = await import("node:sea");
-  if (!sea.isSea()) {
+  const sea = getSeaModule();
+  if (!sea?.isSea()) {
     return (await import("playwright-core")) as PlaywrightChromiumModule;
   }
 

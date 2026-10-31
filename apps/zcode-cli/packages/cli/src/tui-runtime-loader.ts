@@ -4,6 +4,7 @@ import { chmod, mkdir, readFile, rename, rm, writeFile } from "node:fs/promises"
 import { homedir, platform, tmpdir } from "node:os";
 import { dirname, join } from "node:path";
 import { pathToFileURL } from "node:url";
+import { getSeaModule } from "@zcode/core";
 import type { runTui } from "@zcode/tui";
 
 declare const __CLI_VERSION__: string;
@@ -33,9 +34,9 @@ const packageEntryPath = "node_modules/@zcode/tui/dist/index.js";
 const manifestFileName = "manifest.json";
 
 export const loadTuiRuntime = async (): Promise<TuiRuntimeModule> => {
-  const sea = await import("node:sea");
+  const sea = getSeaModule();
 
-  if (!sea.isSea()) {
+  if (!sea?.isSea()) {
     return await import("@zcode/tui");
   }
 
